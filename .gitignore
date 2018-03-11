@@ -1,0 +1,7 @@
+*/bin
+*/obj
+*/obj/
+*/obj/*
+*/*.config
+*/_bin_*
+*/HelloWorld2/Properties
