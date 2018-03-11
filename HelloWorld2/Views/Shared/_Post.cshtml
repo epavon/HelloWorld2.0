@@ -1,0 +1,24 @@
+﻿@model HelloWorld2.Model.Post
+
+@{
+    var numComments = Model.Comments == null ? 0 : Model.Comments.Count;
+}
+
+<div class="apost" data-title="@Model.Title">
+    <div class="post-title">
+        <span class="large-text"><a href="posts/details/@Model.Id" id="the-title">@Model.Title</a></span>
+        <span class="large-text to-the-right comment-icon"><i class="fa fa-comments"></i> @numComments</span>
+    </div>
+    <hr />
+
+    <div class="">
+        
+        
+        @Html.Raw(Model.Content.Split('<')[0]) 
+    </div>
+
+    <div class="post-date">
+        <i class="fa fa-clock-o"></i> @Model.Date.ToShortDateString()<br />
+    </div>
+</div>
+

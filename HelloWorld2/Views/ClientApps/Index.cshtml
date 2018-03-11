@@ -1,0 +1,13 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Client Applications</h2>
+<hr />
+
+@foreach (var item in Model)
+{
+    <a href="GetApp?appName=@item">@item</a>
+}
+

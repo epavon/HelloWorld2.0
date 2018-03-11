@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title - Helo World</title>
+    @Styles.Render("~/Content/csstyles")
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+
+<body>
+    <div class="top-bar">
+        <span class="">
+            <span class="hello-text large-text shift-slighly-right"><i class="fa fa-terminal"></i> hello <i class="fa fa-globe"></i> </span>
+            <img src="~/Content/images/pic_computers.jpg" class="top-image to-the-right" />
+        </span>
+        <br /><br />
+    </div>
+
+    <div id="sticky-anchor"></div>
+    <div id="sticky" class=" wrapper withshadow">
+        <ul class="menu" rel="sam1">
+            <li><a href="/">HOME</a></li>
+            <li><a href="/Projects/Index">PROJECTS</a></li>
+            <li><a href="/ClientApps/Index">DEMOS</a></li>
+            <li><a href="/Home/About">ABOUT</a></li>
+            <li><a href="/Home/Contact">CONTACT</a></li>
+            @if (User.IsInRole("admin"))
+            {
+                <li><a href="/WebsiteManager">ADMIN</a></li>
+            }
+
+        </ul>
+    </div>
+
+
+    <div class="container body-content">
+        <div class="main-content">
+            <span class="to-the-right">@Html.Partial("_LoginPartial")</span>
+            <br />
+            @RenderBody()
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My Hello World</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/site.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿@model HelloWorld2.Models.AboutViewModel
+
+@{
+    ViewBag.Title = "About";
+}
+
+<div class="">
+    <h3>@ViewBag.Title</h3>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-5">
+            <h3>Me<i class="fa fa-user to-the-right"></i></h3>
+            <p>@(Model.AboutMe == null ? "" : Model.AboutMe.Description)</p>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h3>Skills<i class="fa fa-book to-the-right"></i></h3>
+            <p>
+                <div class="row shift-right">
+                    <div class="col-sm-6">
+                        <ul>
+                            @for (int i = 0; i < Model.Skills.Count/2; i++)
+                            {
+                                <li>@Model.Skills[i].SkillName</li>
+                            }
+                            
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul>
+                            @for (int i = Model.Skills.Count / 2; i < Model.Skills.Count; i++)
+                            {
+                                <li>@Model.Skills[i].SkillName</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-5">
+            <h3>What I Create<i class="fa fa-keyboard-o to-the-right"></i></h3>
+            <div class="shift-right">
+                <p>
+                    <ul>
+                        @foreach (var item in Model.Creations)
+                        {
+                            <li>@item.CreationName</li>
+                        }
+
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+                <h3>My Work<i class="fa fa-laptop to-the-right"></i></h3>
+                <div class="works">
+                    @foreach (var item in @Model.WorkPlaces)
+                    {
+                        <div><h4>@item.WorkName</h4></div>
+                        <div>@item.WorkTitle <span class="to-the-right">@item.From.ToShortDateString() - @(item.To == null ? "Present" : item.To.ToString().Remove(10))</span></div>
+                        <span class="shift-right">
+                            @item.Description
+                        </span>
+                        
+                    }
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <h3>Studies<i class="fa fa-graduation-cap to-the-right"></i></h3>
+            <div class="shift-right">
+                @for(int i = 0; i < @Model.Schools.Count; ++i)
+	            {
+                    var degrees = @Model.Schools[i].Degrees.Split(',');
+                    <h4><p>@Model.Schools[i].SchoolName</p></h4>
+                    <ul>
+                        @for (int j = 0; j < degrees.Length; j++)
+                        {
+                            <li>@degrees[j]</li>
+                        }
+                        
+                    </ul>
+	            }
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <h3>This Website<i class="fa fa-sitemap to-the-right"></i></h3>
+            <p>
+                @Model.MyWebsite.Description
+            </p>
+
+        </div>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <h4><i class="fa fa-github-alt" aria-hidden="true"></i> <a href="https://github.com/epavon">My Github</a> </h4>
+            <h4><i class="fa fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/ernesto-pavon-7ba2234b/">My Linkedin</a></h4>
+        </div>
+    </div>
+</div>

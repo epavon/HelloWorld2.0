@@ -1,0 +1,27 @@
+﻿@model HelloWorld2.Models.ClientAppViewModel
+
+@{
+    ViewBag.Title = "ClientApp";
+}
+<link href="~/Content/css/clientapps.css" rel="stylesheet" />
+<h2>ClientApp</h2>
+<hr />
+
+<canvas id="canvas" width="700" height="500"></canvas>
+
+@foreach (var item in Model.ClientFiles ?? new Dictionary<string,string>())
+{
+    if (item.Value == "script") { 
+        @Scripts.Render(item.Key)
+    }
+    if (item.Value == "stylesheet") { 
+        @Styles.Render(item.Key)
+    }
+    
+}
+
+
+
+
+
+

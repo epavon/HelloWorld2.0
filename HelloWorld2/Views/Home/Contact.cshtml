@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Error = "Contact";
+}
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<form action="~/Home/ContactMe" method="post">
+    <div class="">
+        <h3>Contact</h3>
+        <hr />
+
+        @if (ViewBag.MessageResult == "error")
+        { 
+            <div class="alert alert-danger" role="alert">
+                <a href="#" class="alert-link">Message could not be sent. Please try again later.</a>
+            </div>
+        }
+        else if(ViewBag.MessageResult == "success")
+        {
+            <div class="alert alert-success" role="alert">
+                <a href="#" class="alert-link">Message Sent Successfully!</a>
+            </div>
+        }
+        <div class="comments">
+            <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1" id="Email" name="Email">
+            <br />
+
+            <div class="form-horizontal comments-input">
+                <div class="form-group comments-input">
+                    <div class="col-md-8">
+                        <textarea id="Content" name="Content" class="form-control" rows="8" placeholder="Type your comment here .." required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div name="g_recaptcha_response" id="g_recaptcha_response" class="g-recaptcha" data-sitekey="6LelMA0TAAAAAFUpQVCdInvQ9jOmGz3fnohyWPQ-"></div>
+
+            <button class="btn btn-primary comments-submit" id="contact-submit">Submit</button>
+            @*<input type="submit" value="Submit2" />*@
+        </div>
+    </div>
+</form>

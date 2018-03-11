@@ -1,0 +1,23 @@
+﻿@model HelloWorld2.Model.Project
+
+<div class="project">
+    <span class="semi-large-text">@Model.Name<span class="to-the-right"><i class="fa fa-cogs"></i> @Model.Progress</span></span>
+    <br />
+    @Model.Description
+
+    <div class="shift-right">
+        
+            @foreach (var item in Model.Posts ?? new List<HelloWorld2.Model.Post>())
+            {
+                <span class="medium-text"><a href="../posts/details/@item.Id">@item.Title</a></span>
+                <br />
+            }
+        
+    </div>
+    <br />
+    @if(User.IsInRole("admin")) 
+    {
+        <button class="btn btn-primary" value="Add Post" id="add-post">Add Post</button>
+    }
+    <hr />
+</div>

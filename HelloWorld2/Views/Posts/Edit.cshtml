@@ -1,0 +1,58 @@
+﻿@model HelloWorld2.Model.Post
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Post Content</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <div id="post-edit-content-toolbar" class=" post-content-editor-bar">
+                <i class="fa fa-code hand"></i>
+                <i class="fa fa-picture-o hand"></i>
+            </div>
+
+            <div class="col-md-10 post-content">
+                <textarea id="Content" name="Content" class="form-control post-content" data-val-required="The Content field is required">@Model.Content</textarea>
+                
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class=" col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+        <input type="file" onchange="previewFile()"><br>
+        <img src="" height="200" alt="Image preview...">
+    </div>
+}
+
+@using (Html.BeginForm("FileUpload", "Posts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <label for="file">Upload Image:</label>
+    <input type="file" name="file" id="file" style="width: 100%;" />
+    <input type="submit" value="Upload" class="submit" />
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

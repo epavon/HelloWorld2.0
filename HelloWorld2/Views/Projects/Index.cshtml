@@ -1,0 +1,21 @@
+﻿@model IEnumerable<HelloWorld2.Model.Project>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="">
+    <p>
+        <h3>Projects</h3>
+    </p>
+    <hr />
+
+    <div class="projects-block">
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_Project", item)
+        }
+
+    </div>
+</div>
