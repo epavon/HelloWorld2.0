@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HelloWorld2.Model
 {
@@ -27,6 +23,11 @@ namespace HelloWorld2.Model
         [Required]
         [StringLength(150, ErrorMessage = "First name cannot be longer than 150 characters.")]
         public string Content { get; set; }
+
+        public string DisplayContent
+        {
+            get { return Content.Replace("\r\n", "<br />"); }
+        }
 
         public string Email { get; set; }
     }

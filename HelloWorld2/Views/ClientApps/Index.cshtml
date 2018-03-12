@@ -3,11 +3,14 @@
     ViewBag.Title = "Index";
 }
 
-<h3>Client Applications</h3>
+<h3>Demos</h3>
 <hr />
 
 @foreach (var item in Model)
 {
-    <a href="GetApp?appName=@item">@item</a>
+    <div>
+        
+        <a href="GetApp?appName=@item">@item</a>
+    </div>
 }
 

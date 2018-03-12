@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.IO;
 using HelloWorld2.Helpers;
+using System.Data.Entity;
 
 namespace HelloWorld2.Controllers
 {
@@ -18,10 +19,15 @@ namespace HelloWorld2.Controllers
 
         //
         // Index
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var posts = _db.Posts.OrderByDescending(p => p.Date).ToList();
-            posts.ForEach(p => p.Content = p.Content.Replace("\r\n", "<br />"));
+            var posts = await _db.Posts.OrderByDescending(p => p.Date).ToListAsync();
+            //posts.ForEach(p => p.Content = p.Content.Replace("\r\n", "<br />"));
+
+            foreach (var post in posts)
+            {
+                post.Content = post.Content.Replace("\r\n", "<br />");
+            }
 
             return View(posts);
         }

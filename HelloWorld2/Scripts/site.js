@@ -87,7 +87,7 @@
 
     $('#contact-submit').click(function (e) {
         var email = $('#Email').val();
-        var comment = $('#Content').val();
+        _var comment = $('#Content').val();
 
         if (!email || email == '' || !isValidEmail(email)) {
             alert('Please enter a valid email');

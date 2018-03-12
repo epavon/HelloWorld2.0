@@ -45,17 +45,17 @@
     <div class="user-comments medium-big">
         <span class="large-text"><i class="fa fa-comments"></i> Comments </span>
         <div class="acomment">
-            @foreach (var item in @Model.Comments ?? new List<HelloWorld2.Model.Comment>())
+            @foreach (var comment in @Model.Comments ?? new List<HelloWorld2.Model.Comment>())
             {
-                <span data-comment-id="@item.Id">
+                <span data-comment-id="@comment.Id">
                     @if(User.IsInRole("admin"))
                     { 
-                        <button class="btn btn-primary to-the-right edit-comment">Edit</button>
+                        <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button> 
                         <button class="btn btn-danger to-the-right delete-comment">Delete</button>
                     }
-                    <span class="shift-slighly-right"><b>@item.Author</b></span>
+                    <span class="shift-slighly-right"><b>@comment.Author</b></span>
                     <br />
-                    <span class="shift-right">@item.Content</span>
+                    <span class="shift-right">@Html.Raw(comment.DisplayContent)</span>
                     <br />
                 </span>
             }
