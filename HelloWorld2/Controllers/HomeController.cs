@@ -95,37 +95,6 @@ namespace HelloWorld2.Controllers
             return posts;
         }
         
-        //
-        // ClientApp
-        public ActionResult ClientApp(string appName)
-        {
-            ClientAppViewModel result = new ClientAppViewModel();
-
-            if(string.IsNullOrEmpty(appName))
-            {
-                return null;
-            }
-
-            if(!Directory.Exists(Server.MapPath(string.Format(@"~\ClientApps\{0}", appName))))
-            {
-                return null;
-            }
-
-            var items = new Dictionary<string,string>() 
-            { 
-                { "~/ClientApps/FallingBall/particle.js",       "script" },
-                { "~/ClientApps/FallingBall/vector2.js",        "script" },
-                { "~/ClientApps/FallingBall/ball.js",           "script" },
-                { "~/ClientApps/FallingBall/gameloop.js",       "script" },
-                { "~/ClientApps/FallingBall/main.js",           "script" },
-                { "~/ClientApps/FallingBall/style.css",    "stylesheet"},
-                { "~/ClientApps/FallingBall/index.html",        "html" },
-            };
-            result.ClientFiles = items;
-
-            return View(result);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing && _db != null)

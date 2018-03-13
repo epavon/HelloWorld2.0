@@ -4,23 +4,23 @@
     ViewBag.Title = "Details";
 }
 
-
-<div class=" apost">
+<div class="apost">
     @* Post Details *@
-    <div class="post-detail-header">
-        <span class="large-text">@Model.Title<span class="to-the-right"><i class="fa fa-calendar"></i> @(Model.Date == null ? "" : Model.Date.ToShortDateString())</span></span>
+    <div class="post-detail-header semi-large-text">
+        <span class="semi-large-text">@Model.Title<span class="to-the-right"><i class="fa fa-calendar"></i> @(Model.Date == null ? "" : Model.Date.ToShortDateString())</span></span>
         <hr />
         <span><i class="fa fa-user"></i> By @Model.Author <span class="to-the-right"> @Model.Category</span></span>
-        <br /><br />
-        <span class="show-end-of-line">
+        <br />
+        <span class="show-end-of-line medium-big-text">
             @Html.Raw(Model.Content)
         </span>
         
     </div>
     <br />
 
-    @* Comments Section *@
-    <span class="large-text">Add Comment</span>
+    @* Write Comment Section *@
+    <br />
+    <span class="semi-large-text">Add Comment</span>
     <hr />
     <div class="comments">
         <form method="post" action="/Posts/AddComment">
@@ -42,12 +42,12 @@
     <hr />
 
     @* User Comments *@
-    <div class="user-comments medium-big">
+    <div class="user-comments medium-big-text">
         <span class="large-text"><i class="fa fa-comments"></i> Comments </span>
         <div class="acomment">
             @foreach (var comment in @Model.Comments ?? new List<HelloWorld2.Model.Comment>())
             {
-                <span data-comment-id="@comment.Id">
+                <div data-comment-id="@comment.Id">
                     @if(User.IsInRole("admin"))
                     { 
                         <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button> 
@@ -55,11 +55,10 @@
                     }
                     <span class="shift-slighly-right"><b>@comment.Author</b></span>
                     <br />
-                    <span class="shift-right">@Html.Raw(comment.DisplayContent)</span>
+                    <div class="shift-right" style="margin-left: 5px;">@Html.Raw(comment.DisplayContent)</div>
                     <br />
-                </span>
+                </div>
             }
-
             
         </div>
     </div>
