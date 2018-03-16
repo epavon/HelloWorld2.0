@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace HelloWorld2.Model
 {
     public class Comment
@@ -9,6 +10,8 @@ namespace HelloWorld2.Model
         public int Id { get; set; }
 
         public int PostId { get; set; }
+
+        [Newtonsoft.Json.JsonIgnoreAttribute]
         public virtual Post Post { get; set; }
 
         [Required]

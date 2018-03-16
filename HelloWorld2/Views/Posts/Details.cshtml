@@ -1,18 +1,18 @@
 ﻿@model HelloWorld2.Model.Post
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Post Details";
 }
 
 <div class="apost">
     @* Post Details *@
     <div class="post-detail-header semi-large-text">
-        <span class="semi-large-text">@Model.Title<span class="to-the-right"><i class="fa fa-calendar"></i> @(Model.Date == null ? "" : Model.Date.ToShortDateString())</span></span>
+        <span class="semi-large-text">@Model.Title <span class="to-the-right"><i class="fa fa-calendar"></i> @(Model.Date == null ? "" : Model.Date.ToShortDateString())</span></span>
         <hr />
         <span><i class="fa fa-user"></i> By @Model.Author <span class="to-the-right"> @Model.Category</span></span>
         <br />
         <span class="show-end-of-line medium-big-text">
-            @Html.Raw(Model.Content)
+            @Html.Raw(Model.ContentDisplay)
         </span>
         
     </div>
@@ -20,46 +20,49 @@
 
     @* Write Comment Section *@
     <br />
-    <span class="semi-large-text">Add Comment</span>
+    <span class="semi-large-text">Add Comment</span><span class="label label-info to-the-right">@Model.Project.Name</span>
+    
     <hr />
     <div class="comments">
-        <form method="post" action="/Posts/AddComment">
-            <input type="hidden" name="PostId" value="@Model.Id" />
-            <input type="text" name="Author" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+        @*<form method="post" action="/Posts/AddComment">*@
+            <input type="hidden" id="post-id" name="PostId" value="@Model.Id" />
+            <input id="comment-user" type="text" name="Author" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
             <br />
 
             <div class="form-horizontal comments-input">
                 <div class="form-group comments-input">
                     <div class="col-md-8">
-                        <textarea class="form-control" name="Content" rows="8" placeholder="Type your comment here .." required></textarea>
+                        <textarea id="comment-content" class="form-control" name="Content" rows="8" placeholder="Type your comment here .." required></textarea>
                     </div>
                 </div>
             </div>
 
-            <button class="btn btn-primary comments-submit">Submit</button>
-        </form>
+            <button id="comment-submit" class="btn btn-primary comments-submit">Submit</button>
+        @*</form>*@
     </div>
     <hr />
 
     @* User Comments *@
-    <div class="user-comments medium-big-text">
+    <div  class="user-comments medium-big-text">
         <span class="large-text"><i class="fa fa-comments"></i> Comments </span>
-        <div class="acomment">
-            @foreach (var comment in @Model.Comments ?? new List<HelloWorld2.Model.Comment>())
-            {
-                <div data-comment-id="@comment.Id">
-                    @if(User.IsInRole("admin"))
-                    { 
-                        <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button> 
-                        <button class="btn btn-danger to-the-right delete-comment">Delete</button>
-                    }
-                    <span class="shift-slighly-right"><b>@comment.Author</b></span>
-                    <br />
-                    <div class="shift-right" style="margin-left: 5px;">@Html.Raw(comment.DisplayContent)</div>
-                    <br />
-                </div>
-            }
-            
+        <div id="user-comments">
+            <div class="acomment">
+                @foreach (var comment in @Model.Comments ?? new List<HelloWorld2.Model.Comment>())
+                {
+                    <div data-comment-id="@comment.Id" class="one-comment">
+                        @if (User.IsInRole("admin"))
+                        {
+                            <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button>
+                            <button class="btn btn-danger to-the-right delete-comment">Delete</button>
+                        }
+                        <span class="shift-slighly-right"><b>@comment.Author</b></span>
+                        <br />
+                        <div class="shift-right" style="margin-left: 5px;">@Html.Raw(comment.DisplayContent)</div>
+                        <br />
+                    </div>
+                }
+
+            </div>
         </div>
     </div>
 

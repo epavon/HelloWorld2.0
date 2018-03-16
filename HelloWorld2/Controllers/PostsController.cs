@@ -11,6 +11,7 @@ using HelloWorld2.Models;
 using HelloWorld2.Data;
 using HelloWorld2.Model;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace HelloWorld2.Controllers
 {
@@ -44,7 +45,7 @@ namespace HelloWorld2.Controllers
 
         // POST: Posts/AddComment
         [HttpPost]
-        public async Task<ActionResult> AddComment([Bind(Include = "Content,Author,PostId")]Comment comment)
+        public async Task<JsonResult> AddComment([Bind(Include = "Content,Author,PostId")]Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -52,13 +53,15 @@ namespace HelloWorld2.Controllers
                 Post post = await db.Posts.FindAsync(comment.PostId);
                 if (post == null)
                 {
-                    return HttpNotFound();
+                    return null;
                 }
 
                 post.Comments.Add(comment);
                 await db.SaveChangesAsync();
             }
-            return RedirectToAction("Details", new  { id = comment.PostId });
+
+            comment.Post = null;
+            return Json(comment);
         }
 
 

@@ -30,6 +30,8 @@ namespace HelloWorld2.Model
         [AllowHtml]
         public string Content { get; set; }
 
+        public string ContentDisplay { get { return Content.Replace("\r\n", "<br />"); } }
+
         [Required]
         [StringLength(50, ErrorMessage = "Author cannot be longer than 50 characters.")]
         public string Author { get; set; }

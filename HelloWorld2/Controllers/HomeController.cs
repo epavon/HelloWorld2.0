@@ -22,12 +22,6 @@ namespace HelloWorld2.Controllers
         public async Task<ActionResult> Index()
         {
             var posts = await _db.Posts.OrderByDescending(p => p.Date).ToListAsync();
-            //posts.ForEach(p => p.Content = p.Content.Replace("\r\n", "<br />"));
-
-            foreach (var post in posts)
-            {
-                post.Content = post.Content.Replace("\r\n", "<br />");
-            }
 
             return View(posts);
         }
