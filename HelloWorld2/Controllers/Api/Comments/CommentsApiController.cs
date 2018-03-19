@@ -1,18 +1,29 @@
 ﻿using HelloWorld2.Data;
 using HelloWorld2.Model;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace HelloWorld2.Controllers.Api.Comments
 {
-    [Route("api/Comments")]
-    public class CommentsApiController : Controller
+    [AllowAnonymous]
+    [RoutePrefix("api/comments")]
+    public class CommentsApiController : ApiController
     {
         private HelloWorldDb db = new HelloWorldDb();
 
+        [HttpGet]
+        [Route("getall")]
+        public async Task<List<Comment>> GetComments()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpPost]
-        public async Task<JsonResult> AddComment([Bind(Include = "Content,Author,PostId")]Comment comment)
+        [Route("{postId}/add")]
+        public async Task<JsonResult<Comment>> AddComment(int postId, Comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -26,6 +37,8 @@ namespace HelloWorld2.Controllers.Api.Comments
                 post.Comments.Add(comment);
                 await db.SaveChangesAsync();
             }
+
+            comment.Post = null; // avoid circular reference
             return Json(comment);
         }
     }

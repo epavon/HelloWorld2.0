@@ -10,7 +10,7 @@
     
 </head>
 
-<body>
+<body ng-app>
     <div class="top-bar">
         <span class="">
             <span class="hello-text large-text shift-slighly-right"><i class="fa fa-terminal"></i> hello <i class="fa fa-globe"></i> </span>
@@ -31,7 +31,6 @@
             {
                 <li><a href="/WebsiteManager">ADMIN</a></li>
             }
-
         </ul>
     </div>
 
@@ -50,6 +49,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/site.js"></script>
     @RenderSection("scripts", required: false)
 </body>

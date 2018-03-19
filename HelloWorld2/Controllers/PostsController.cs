@@ -60,7 +60,7 @@ namespace HelloWorld2.Controllers
                 await db.SaveChangesAsync();
             }
 
-            comment.Post = null;
+            comment.Post = null; // avoid circular reference
             return Json(comment);
         }
 

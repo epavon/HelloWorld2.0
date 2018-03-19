@@ -9,7 +9,7 @@
     <div class="post-detail-header semi-large-text">
         <span class="semi-large-text">@Model.Title <span class="to-the-right"><i class="fa fa-calendar"></i> @(Model.Date == null ? "" : Model.Date.ToShortDateString())</span></span>
         <hr />
-        <span><i class="fa fa-user"></i> By @Model.Author <span class="to-the-right"> @Model.Category</span></span>
+        <span><i class="fa fa-user"></i> By @Model.Author <span class="label label-info to-the-right">@Model.Project.Name</span></span>
         <br />
         <span class="show-end-of-line medium-big-text">
             @Html.Raw(Model.ContentDisplay)
@@ -20,8 +20,8 @@
 
     @* Write Comment Section *@
     <br />
-    <span class="semi-large-text">Add Comment</span><span class="label label-info to-the-right">@Model.Project.Name</span>
-    
+    <span class="semi-large-text">Add Comment</span>
+    @*<span class="to-the-right"> @Model.Category</span>*@
     <hr />
     <div class="comments">
         @*<form method="post" action="/Posts/AddComment">*@
@@ -67,4 +67,10 @@
     </div>
 
 </div>
+
+@section scripts {
+    
+<script src="~/Scripts/app/Comments/ctl-comment.js"></script>
+
+}
 
