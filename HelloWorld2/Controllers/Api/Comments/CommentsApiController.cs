@@ -9,21 +9,27 @@ using System.Web.Http.Results;
 namespace HelloWorld2.Controllers.Api.Comments
 {
     [AllowAnonymous]
-    [RoutePrefix("api/comments")]
+    [RoutePrefix("api/posts")]
     public class CommentsApiController : ApiController
     {
         private HelloWorldDb db = new HelloWorldDb();
 
         [HttpGet]
-        [Route("getall")]
-        public async Task<List<Comment>> GetComments()
+        [Route("{postid}/comments")]
+        public async Task<IHttpActionResult> GetComments(int postid)
         {
-            throw new NotImplementedException();
+            Post post = await db.Posts.FindAsync(postid);
+            if(post == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(post.Comments);
         }
 
         [HttpPost]
-        [Route("{postId}/add")]
-        public async Task<JsonResult<Comment>> AddComment(int postId, Comment comment)
+        [Route("{postid}/add")]
+        public async Task<JsonResult<Comment>> AddComment(int postid, Comment comment)
         {
             if (ModelState.IsValid)
             {
