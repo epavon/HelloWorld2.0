@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.Results;
 
 namespace HelloWorld2.Controllers.Api.Comments
@@ -28,24 +29,27 @@ namespace HelloWorld2.Controllers.Api.Comments
         }
 
         [HttpPost]
+        [ResponseType(typeof(Comment))]
         [Route("{postid}/add")]
-        public async Task<JsonResult<Comment>> AddComment(int postid, Comment comment)
+        public async Task<IHttpActionResult> AddComment(int postid, Comment comment)
         {
             if (ModelState.IsValid)
             {
                 comment.Date = DateTime.Today;
-                Post post = await db.Posts.FindAsync(comment.PostId);
+                Post post = await db.Posts.FindAsync(postid);
                 if (post == null)
                 {
-                    return null;
+                    return NotFound() ;
                 }
 
                 post.Comments.Add(comment);
                 await db.SaveChangesAsync();
+
+                comment.Post = null; // avoid circular reference
+                return Ok(comment);
             }
 
-            comment.Post = null; // avoid circular reference
-            return Json(comment);
+            return BadRequest();
         }
     }
 }

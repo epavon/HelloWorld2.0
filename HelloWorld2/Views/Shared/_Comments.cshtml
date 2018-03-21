@@ -1,0 +1,22 @@
+﻿
+<div class="user-comments medium-big-text" ng-controller="CommentsController as Comments">
+    <span class="large-text"><i class="fa fa-comments"></i> Comments </span>
+    <div id="user-comments">
+        <div class="acomment">
+            <div  ng-repeat="comment in Comments.comments">
+                <div data-comment-id="{{comment.id}}" class="one-comment">
+                    @if (User.IsInRole("admin"))
+                    {
+                        <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button>
+                        <button class="btn btn-danger to-the-right delete-comment">Delete</button>
+                    }
+                    <span class="shift-slighly-right"><b>{{comment.author}}</b></span>
+                    <br />
+                    <div class="shift-right" style="margin-left: 5px;">{{comment.displayContent}}</div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

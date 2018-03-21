@@ -10,7 +10,7 @@
     
 </head>
 
-<body ng-app>
+<body ng-app="helloworld">
     <div class="top-bar">
         <span class="">
             <span class="hello-text large-text shift-slighly-right"><i class="fa fa-terminal"></i> hello <i class="fa fa-globe"></i> </span>
@@ -52,5 +52,10 @@
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/site.js"></script>
     @RenderSection("scripts", required: false)
+
+    @* Angular scripts *@
+    <script src="~/Scripts/app/ctl-app.js"></script>
+    @RenderSection("ngservices", required: false)
+    @RenderSection("ngcontrollers", required: false)
 </body>
 </html>

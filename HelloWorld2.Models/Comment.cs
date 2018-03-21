@@ -29,7 +29,14 @@ namespace HelloWorld2.Model
 
         public string DisplayContent
         {
-            get { return Content.Replace("\r\n", "<br />"); }
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Content))
+                {
+                    return Content.Replace("\r\n", "<br />");
+                }
+                return "";
+            }
         }
 
         public string Email { get; set; }
