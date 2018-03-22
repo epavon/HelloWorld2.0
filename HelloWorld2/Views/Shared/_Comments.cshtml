@@ -1,22 +1,44 @@
-﻿
-<div class="user-comments medium-big-text" ng-controller="CommentsController as Comments">
-    <span class="large-text"><i class="fa fa-comments"></i> Comments </span>
-    <div id="user-comments">
-        <div class="acomment">
-            <div  ng-repeat="comment in Comments.comments">
-                <div data-comment-id="{{comment.id}}" class="one-comment">
-                    @if (User.IsInRole("admin"))
-                    {
-                        <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button>
-                        <button class="btn btn-danger to-the-right delete-comment">Delete</button>
-                    }
-                    <span class="shift-slighly-right"><b>{{comment.author}}</b></span>
-                    <br />
-                    <div class="shift-right" style="margin-left: 5px;">{{comment.displayContent}}</div>
-                    <br />
+﻿@model int
+
+<div ng-controller="CommentsController as Comments">
+    <div class="comments">
+        @*<form method="post" action="/Posts/AddComment">*@
+        <input type="hidden" id="post-id" name="PostId" value="@Model" />
+        <input id="comment-user" type="text" name="Author" class="form-control" placeholder="Username" aria-describedby="basic-addon1" ng-model="Comments.newComment.Author">
+        <br />
+
+        <div class="form-horizontal comments-input">
+            <div class="form-group comments-input">
+                <div class="col-md-8">
+                    <textarea id="comment-content" class="form-control" name="Content" rows="8" placeholder="Type your comment here .." required ng-model="Comments.newComment.Content"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <button id="comment-submit" class="btn btn-primary comments-submit" ng-click="Comments.addComment(Comments.newComment)">Submit</button>
+        @*</form>*@
+    </div>
+    <hr />
+    <div class="user-comments medium-big-text" data-post-id="@Model">
+        <input id="comments-post-id" type="hidden" value="@Model" />
+        <span class="large-text"><i class="fa fa-comments"></i> Comments </span>
+        <div id="user-comments">
+            <div class="acomment">
+                <div ng-repeat="comment in Comments.comments">
+                    <div data-comment-id="{{comment.id}}" class="one-comment">
+                        @if (User.IsInRole("admin"))
+                        {
+                            <button class="btn btn-primary to-the-right edit-comment" style="margin-left:3px">Edit</button>
+                            <button class="btn btn-danger to-the-right delete-comment">Delete</button>
+                        }
+                        <span class="shift-slighly-right"><b>{{comment.author}}</b></span>
+                        <br />
+                        <div class="shift-right" style="margin-left: 5px;" ng-bind-html="comment.displayContent"></div>
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+</div>

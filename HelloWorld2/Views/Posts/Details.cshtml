@@ -23,28 +23,11 @@
     <span class="semi-large-text">Add Comment</span>
     @*<span class="to-the-right"> @Model.Category</span>*@
     <hr />
-    <div class="comments">
-        @*<form method="post" action="/Posts/AddComment">*@
-        <input type="hidden" id="post-id" name="PostId" value="@Model.Id" />
-        <input id="comment-user" type="text" name="Author" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-        <br />
-
-        <div class="form-horizontal comments-input">
-            <div class="form-group comments-input">
-                <div class="col-md-8">
-                    <textarea id="comment-content" class="form-control" name="Content" rows="8" placeholder="Type your comment here .." required></textarea>
-                </div>
-            </div>
-        </div>
-
-        <button id="comment-submit" class="btn btn-primary comments-submit">Submit</button>
-        @*</form>*@
-    </div>
-    <hr />
+    
 
     @* User Comments *@
 
-    @Html.Partial("_Comments")
+    @Html.Partial("_Comments", Model.Id)
     @*@foreach (var comment in @Model.Comments ?? new List<HelloWorld2.Model.Comment>())
         {
             <div data-comment-id="@comment.Id" class="one-comment">

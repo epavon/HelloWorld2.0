@@ -261,6 +261,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\Comments\ctl-comments.js" />
@@ -330,6 +332,7 @@
     <Content Include="Views\ClientApps\GetApp.cshtml" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Views\Shared\_Comments.cshtml" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

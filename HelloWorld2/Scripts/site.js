@@ -101,37 +101,37 @@
 
     });
 
-    $('#comment-submit').click(function (e) {
-        var user = $('#comment-user').val();
-        var comment = $('#comment-content').val();
-        var postid = $('#post-id').val();
+    //$('#comment-submit').click(function (e) {
+    //    var user = $('#comment-user').val();
+    //    var comment = $('#comment-content').val();
+    //    var postid = $('#post-id').val();
 
-        if (!user || user == '') {
-            alert('Please enter a valid email');
-            return false;
-        }
+    //    if (!user || user == '') {
+    //        alert('Please enter a valid email');
+    //        return false;
+    //    }
 
-        if (!comment || comment == '') {
-            alert('Please enter a comment');
-            return false;
-        }
+    //    if (!comment || comment == '') {
+    //        alert('Please enter a comment');
+    //        return false;
+    //    }
 
-        ajaxCall('POST', '/Posts/AddComment', { 'Content': comment, 'Author': user, 'PostId':postid },
-            function (response) {
-                $('.acomment .one-comment:last').after(
-                    '<div data-comment-id="' + 5 + '" class="one-comment">' +
-                    '<span class="shift-slighly-right"><b>' + 'author' + '</b></span>' +
-                    '<br />' +
-                    '<div class="shift-right" style="margin-left: 5px;">' + 'content' + '</div>' +
-                    '<br />'
-                );
-                alert('success');
-            },
-            function (err) {
-                alert('error');
-            }
-        );
-    });
+    //    ajaxCall('POST', '/Posts/AddComment', { 'Content': comment, 'Author': user, 'PostId':postid },
+    //        function (response) {
+    //            $('.acomment .one-comment:last').after(
+    //                '<div data-comment-id="' + 5 + '" class="one-comment">' +
+    //                '<span class="shift-slighly-right"><b>' + 'author' + '</b></span>' +
+    //                '<br />' +
+    //                '<div class="shift-right" style="margin-left: 5px;">' + 'content' + '</div>' +
+    //                '<br />'
+    //            );
+    //            alert('success');
+    //        },
+    //        function (err) {
+    //            alert('error');
+    //        }
+    //    );
+    //});
 
     $('#add-post').click(function() {
         window.location = "/ManagePosts/Create";

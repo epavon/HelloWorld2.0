@@ -1,5 +1,5 @@
 ﻿
-    var helloworldapp = angular.module('helloworld', []);
+var helloworldapp = angular.module('helloworld', ['ngSanitize']);
 
 
 
